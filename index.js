@@ -5,6 +5,7 @@ import { getAllSbcs } from './services/Firebase';
 import Futbin from './api/Futbin'
 
 const app = express();
+const port = process.env.PORT || 5000;
 
 app.get('/', async (req, res) => {
     res.send('Hello world.')
@@ -21,6 +22,6 @@ app.get('/v1/fetchLastYearSBCS', async (req, res) => {
     res.json({ success: true, sbcs })
 })
 
-app.listen(5000, () => {
-    console.log('Example app listening on port 5000!');
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`);
 });
