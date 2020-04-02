@@ -5,7 +5,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon --ignore './ui/' -r esm index.js"
+    "start": "node -r esm index.js",
+    "dev": "nodemon -r esm index.js"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
