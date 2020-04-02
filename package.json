@@ -1,0 +1,22 @@
+{
+  "name": "FutbinAPI",
+  "version": "1.0.0",
+  "description": "An app for handle a lot of Futbin functionality through API",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon --ignore './ui/' -r esm index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  },
+  "dependencies": {
+    "@google-cloud/firestore": "^3.5.1",
+    "axios": "^0.19.2",
+    "cheerio": "^1.0.0-rc.3",
+    "dotenv": "^8.2.0",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "firebase": "^7.8.2"
+  }
+}
