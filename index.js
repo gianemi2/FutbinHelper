@@ -1,10 +1,12 @@
 //@ts-check
 import express from 'express'
+var cors = require('cors')
 
 import { getAllSbcs } from './services/Firebase';
 import Futbin from './api/Futbin'
 
 const app = express();
+app.use(cors)
 const port = process.env.PORT || 5000;
 
 app.get('/', async (req, res) => {
