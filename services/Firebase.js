@@ -1,3 +1,5 @@
+import { query } from 'express';
+
 //@ts-check
 const firebase = require('firebase')
 require('dotenv').config()
@@ -41,7 +43,6 @@ const getAllSbcs = async (page, resultPerPage = 50) => {
     const sbcs = [];
     await db.collection('sbc').get()
         .then(querySnapshot => {
-            console.log(querySnapshot.metadata.fromCache);
             querySnapshot.docs.splice(page * resultPerPage, resultPerPage).forEach(doc => {
                 sbcs.push(doc.data());
             });
@@ -49,4 +50,50 @@ const getAllSbcs = async (page, resultPerPage = 50) => {
     return sbcs;
 }
 
-export { getAllSbcs, db }
+const getLastYearTodaySbcs = async () => {
+
+    const sbcs = await db.collection('sbc').get()
+        .then(querySnapshot => {
+            const sbcs = {
+                past: [],
+                today: [],
+                future: []
+            }
+
+            querySnapshot.docs.forEach(doc => {
+                const sbc = doc.data();
+
+                const sbcDate = new Date(sbc.dates.startsOn);
+                const today = new Date();
+
+                const diff = daysBetween(today, sbcDate);
+
+                if (diff < 8 && diff > 0) {
+                    sbcs.future.push(sbc);
+                } else if (diff == 0) {
+                    sbcs.today.push(sbc);
+                } else if (diff > -8 && diff < 0) {
+                    sbcs.past.push(sbc);
+                }
+            })
+            return sbcs;
+        })
+    return sbcs;
+}
+
+const daysBetween = (first, second) => {
+
+    // Copy date parts of the timestamps, discarding the time parts.
+    var one = new Date(new Date().getFullYear(), first.getMonth(), first.getDate());
+    var two = new Date(new Date().getFullYear(), second.getMonth(), second.getDate());
+
+    // Do the math.
+    var millisecondsPerDay = 1000 * 60 * 60 * 24;
+    var millisBetween = two.getTime() - one.getTime();
+    var days = millisBetween / millisecondsPerDay;
+
+    // Round down.
+    return Math.floor(days);
+}
+
+export { getAllSbcs, db, getLastYearTodaySbcs }

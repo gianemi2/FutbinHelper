@@ -2,7 +2,7 @@
 import express from 'express'
 var cors = require('cors')
 
-import { getAllSbcs } from './services/Firebase';
+import { getAllSbcs, getLastYearTodaySbcs } from './services/Firebase';
 import Futbin from './api/Futbin'
 
 const app = express();
@@ -22,6 +22,11 @@ app.get('/v1/searchPlayer', async (req, res) => {
 app.get('/v1/fetchLastYearSBCS', async (req, res) => {
     const sbcs = await getAllSbcs(0)
     res.json({ success: true, sbcs })
+})
+
+app.get('/v1/getLastYearTodaySbcs', async (req, res) => {
+    const sbcs = await getLastYearTodaySbcs();
+    res.json({ success: true, sbcs });
 })
 
 app.listen(port, () => {
