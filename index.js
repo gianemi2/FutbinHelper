@@ -30,7 +30,13 @@ app.get('/v1/getLastYearTodaySbcs', async (req, res) => {
 })
 
 app.get('/v1/getSbcForFC', async (req, res) => {
-    const sbcs = await getAllSbcs(0, 10);
+
+    const dateParameter = {
+        start: req.query.start,
+        end: req.query.end
+    }
+
+    const sbcs = await getAllSbcs(0, 50, dateParameter);
     const adaptedSbcs = sbcs.map(sbc => {
         return {
             id: sbc.id,

@@ -39,15 +39,33 @@ db.enablePersistence()
  * @param {number} resultPerPage 
  * @returns {Promise}
  */
-const getAllSbcs = async (page = false, resultPerPage = 50) => {
-    const sbcs = [];
+const getAllSbcs = async (page = false, resultPerPage = 50, dateFilter = {}) => {
+    let sbcs = [];
     await db.collection('sbc').get()
         .then(querySnapshot => {
-            let results = page ? querySnapshot.docs.splice(page * resultPerPage, resultPerPage) : querySnapshot.docs
+            if (dateFilter.start) {
+                querySnapshot.docs.forEach(doc => {
+                    const sbc = doc.data()
+                    const sbcDates = {
+                        start: new Date(sbc.dates.startsOn).getTime(),
+                        end: new Date(sbc.dates.endsOn).getTime()
+                    }
+                    const requiredDates = {
+                        start: new Date(dateFilter.start).getTime(),
+                        end: new Date(dateFilter.end).getTime()
+                    }
 
-            results.forEach(doc => {
-                sbcs.push(doc.data());
-            });
+                    if (sbcDates.start > requiredDates.start && sbcDates.start < requiredDates.end) {
+                        sbcs.push(sbc)
+                    }
+                })
+            } else {
+                let results = page ? querySnapshot.docs.splice(page * resultPerPage, resultPerPage) : querySnapshot.docs
+
+                results.forEach(doc => {
+                    sbcs.push(doc.data());
+                });
+            }
         });
     return sbcs;
 }
