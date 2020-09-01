@@ -39,11 +39,13 @@ db.enablePersistence()
  * @param {number} resultPerPage 
  * @returns {Promise}
  */
-const getAllSbcs = async (page, resultPerPage = 50) => {
+const getAllSbcs = async (page = false, resultPerPage = 50) => {
     const sbcs = [];
     await db.collection('sbc').get()
         .then(querySnapshot => {
-            querySnapshot.docs.splice(page * resultPerPage, resultPerPage).forEach(doc => {
+            let results = page ? querySnapshot.docs.splice(page * resultPerPage, resultPerPage) : querySnapshot.docs
+
+            results.forEach(doc => {
                 sbcs.push(doc.data());
             });
         });

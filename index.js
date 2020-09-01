@@ -29,6 +29,24 @@ app.get('/v1/getLastYearTodaySbcs', async (req, res) => {
     res.json({ success: true, sbcs });
 })
 
+app.get('/v1/getSbcForFC', async (req, res) => {
+    const sbcs = await getAllSbcs(0, 10);
+    const adaptedSbcs = sbcs.map(sbc => {
+        return {
+            id: sbc.id,
+            start: sbc.dates.startsOn,
+            end: sbc.dates.endsOn,
+            title: sbc.title,
+            editable: false,
+            extendedProps: {
+                prices: sbc.prices,
+                childSbc: sbc.sbcs
+            }
+        }
+    })
+    res.json(adaptedSbcs)
+})
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });
