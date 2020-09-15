@@ -1,4 +1,7 @@
 import axios from 'axios'
+import cheerio from 'cheerio'
+
+import getCheapestPlayers from './getCheapestPlayers'
 
 const Futbin = {
     fetchPlayers: async (name) => {
@@ -19,6 +22,10 @@ const Futbin = {
                 return { success: false, message: error }
             }
         }
+    },
+    fetchCheapestPlayers: async () => {
+        const data = await getCheapestPlayers()
+        return { success: true, data }
     }
 }
 export default Futbin;

@@ -13,6 +13,11 @@ app.get('/', async (req, res) => {
     res.send('Hello world.')
 });
 
+app.get('/v1/cheapestPlayers', async (req, res) => {
+    const response = await Futbin.fetchCheapestPlayers()
+    res.json(response)
+})
+
 app.get('/v1/searchPlayer', async (req, res) => {
     const { name } = req.query;
     const response = await Futbin.fetchPlayers(name)

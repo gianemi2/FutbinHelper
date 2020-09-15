@@ -22,6 +22,7 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 db.enablePersistence()
     .catch(function (err) {
+        console.log(err.code);
         if (err.code == 'failed-precondition') {
             // Multiple tabs open, persistence can only be enabled
             // in one tab at a a time.
