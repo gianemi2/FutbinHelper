@@ -1,5 +1,5 @@
-import cheerio from 'cheerio'
-import axios from 'axios'
+const cheerio = require('cheerio')
+const axios = require('axios')
 
 const BASE_URL = 'https://www.futbin.com'
 
@@ -30,4 +30,4 @@ const getCheapestPlayers = async () => {
     return ratingsArray
 }
 
-export default getCheapestPlayers
+module.exports = getCheapestPlayers

@@ -1,6 +1,4 @@
-import { query } from 'express';
-
-//@ts-check
+const { query } = require('express');
 const firebase = require('firebase')
 require('dotenv').config()
 
@@ -117,4 +115,4 @@ const daysBetween = (first, second) => {
     return Math.floor(days);
 }
 
-export { getAllSbcs, db, getLastYearTodaySbcs }
+module.exports = { getAllSbcs, db, getLastYearTodaySbcs }

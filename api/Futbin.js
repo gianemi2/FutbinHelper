@@ -1,7 +1,7 @@
-import axios from 'axios'
-import cheerio from 'cheerio'
+const axios = require('axios')
+const cheerio = require('cheerio')
 
-import getCheapestPlayers from './getCheapestPlayers'
+const getCheapestPlayers = require('./getCheapestPlayers')
 
 const Futbin = {
     fetchPlayers: async (name) => {
@@ -28,4 +28,4 @@ const Futbin = {
         return { success: true, data }
     }
 }
-export default Futbin;
+module.exports = Futbin

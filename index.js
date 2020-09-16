@@ -1,16 +1,16 @@
-//@ts-check
-import express from 'express'
-var cors = require('cors')
-
-import { getAllSbcs, getLastYearTodaySbcs } from './services/Firebase';
-import Futbin from './api/Futbin'
-
+const express = require('express')
+const cors = require('cors')
 const app = express();
-app.use(cors())
 const port = process.env.PORT || 5000;
 
+const { getAllSbcs, getLastYearTodaySbcs } = require('./services/Firebase')
+
+const Futbin = require('./api/Futbin')
+
+app.use(cors())
+
 app.get('/', async (req, res) => {
-    res.send('Hello world.')
+    res.send('Hello world from FutbinAPI.')
 });
 
 app.get('/v1/cheapestPlayers', async (req, res) => {

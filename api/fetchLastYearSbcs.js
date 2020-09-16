@@ -1,6 +1,6 @@
-import cheerio from 'cheerio'
-import axios from 'axios'
-import { db } from '../services/Firebase'
+const cheerio = require('cheerio')
+const axios = require('axios')
+const { db } = require('../services/Firebase')
 
 const BASE_URL = 'https://www.futbin.com'
 const START = 900;
@@ -128,4 +128,4 @@ export const fetchSbcInfo = (sbc_url) => {
     })
 }
 
-export default fetchLastYearSBCS
+module.exports = fetchLastYearSBCS
