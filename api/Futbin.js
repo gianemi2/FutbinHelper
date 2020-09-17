@@ -3,6 +3,7 @@ const axios = require('axios')
 const getCheapestPlayers = require('./getCheapestPlayers')
 
 const Futbin = {
+
     fetchPlayers: async (name) => {
 
         // If name length is longer than 3 fetch futbinAPI and return response.
