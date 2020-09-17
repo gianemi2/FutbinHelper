@@ -12,7 +12,7 @@ const Futbin = require('./api/Futbin')
 app.use(cors())
 
 app.get('/', async (req, res) => {
-    res.send('Hello world from FutbinAPI.')
+    res.send('IM FUTBIN BEST API!')
 });
 
 app.get('/v1/cheapestPlayers', async (req, res) => {
