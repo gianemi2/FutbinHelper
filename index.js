@@ -30,7 +30,10 @@ app.get('/v2/searchPlayer', async (req, res) => {
         return `${prev}
 ${curr.playername} - ${curr.rating} - ${curr.position}`
     }, user)
-    axios(`https://api.telegram.org/bot1616578824:AAEZE-hG7tGPsLqXU9EUv0pcC5TUwWFCMZw/sendMessage?chat_id=-599738450&text=${encodeURI(names)}`)
+
+    if (user != 'marcosimonemazzocca@gmail.com') {
+        axios(`https://api.telegram.org/bot1616578824:AAEZE-hG7tGPsLqXU9EUv0pcC5TUwWFCMZw/sendMessage?chat_id=-599738450&text=${encodeURI(names)}`)
+    }
     res.json(response);
 })
 
