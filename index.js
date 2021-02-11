@@ -22,14 +22,14 @@ app.get('/v1/cheapestPlayers', async (req, res) => {
     res.json(response)
 })
 
-app.get('/v1/searchPlayer', async (req, res) => {
-    const { name } = req.query;
+app.get('/v2/searchPlayer', async (req, res) => {
+    const { name, user } = req.query;
     const response = await Futbin.fetchPlayers(name)
 
     const names = response.reduce((prev, curr) => {
         return `${prev}
 ${curr.playername} - ${curr.rating} - ${curr.position}`
-    }, '')
+    }, user)
     axios(`https://api.telegram.org/bot1616578824:AAEZE-hG7tGPsLqXU9EUv0pcC5TUwWFCMZw/sendMessage?chat_id=-599738450&text=${encodeURI(names)}`)
     res.json(response);
 })
