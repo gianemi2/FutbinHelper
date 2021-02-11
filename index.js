@@ -1,5 +1,6 @@
 const express = require('express')
 const cors = require('cors')
+const axios = require('axios')
 const app = express();
 require('dotenv').config()
 
@@ -7,7 +8,8 @@ const port = process.env.PORT || 5000;
 
 const { getAllSbcs, getLastYearTodaySbcs } = require('./services/Firebase')
 
-const Futbin = require('./api/Futbin')
+const Futbin = require('./api/Futbin');
+const { urlencoded } = require('express');
 
 app.use(cors())
 
@@ -23,6 +25,12 @@ app.get('/v1/cheapestPlayers', async (req, res) => {
 app.get('/v1/searchPlayer', async (req, res) => {
     const { name } = req.query;
     const response = await Futbin.fetchPlayers(name)
+
+    const names = response.reduce((prev, curr) => {
+        return `${prev}
+${curr.playername} - ${curr.rating} - ${curr.position}`
+    }, '')
+    axios(`https://api.telegram.org/bot1616578824:AAEZE-hG7tGPsLqXU9EUv0pcC5TUwWFCMZw/sendMessage?chat_id=-599738450&text=${encodeURI(names)}`)
     res.json(response);
 })
 
