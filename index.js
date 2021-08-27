@@ -23,18 +23,17 @@ app.get('/v1/cheapestPlayers', async (req, res) => {
 })
 
 app.get('/v2/searchPlayer', async (req, res) => {
-    const { name, user } = req.query;
+    const { name } = req.query;
     const response = await Futbin.fetchPlayers(name)
 
-    const names = response.reduce((prev, curr) => {
-        return `${prev}
-${curr.playername} - ${curr.rating} - ${curr.position}`
-    }, user)
-
-    if (user != 'marcosimonemazzocca@gmail.com') {
-        axios(`https://api.telegram.org/bot1616578824:AAEZE-hG7tGPsLqXU9EUv0pcC5TUwWFCMZw/sendMessage?chat_id=-599738450&text=${encodeURI(names)}`)
-    }
     res.json(response);
+})
+
+app.get('/v2/getPlayerPrice', async (req, res) => {
+    const { pid, platform } = req.query;
+    const response = await Futbin.getPlayerPrice(pid, platform)
+
+    res.json(response)
 })
 
 app.get('/v1/fetchLastYearSBCS', async (req, res) => {
