@@ -1,0 +1,57 @@
+Arguments: 
+  /usr/local/Cellar/node/19.4.0_1/bin/node /usr/local/Cellar/yarn/1.22.17_2/libexec/bin/yarn.js
+
+PATH: 
+  /Library/Frameworks/Python.framework/Versions/3.9/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:/opt/X11/bin:~/.dotnet/tools
+
+Yarn version: 
+  1.22.17
+
+Node version: 
+  19.4.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  SyntaxError: /Users/marcogiannini/github/FutbinHelper/package.json: Unexpected token '/', "// 2023100"... is not valid JSON
+      at JSON.parse (<anonymous>)
+      at /usr/local/Cellar/yarn/1.22.17_2/libexec/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/usr/local/Cellar/yarn/1.22.17_2/libexec/lib/cli.js:310:30)
+      at /usr/local/Cellar/yarn/1.22.17_2/libexec/lib/cli.js:321:13
+
+npm manifest: 
+  // 20231004221852
+  // https://raw.githubusercontent.com/gianemi2/FutbinHelper/master/package.json
+  
+  {
+    "name": "FutbinAPI",
+    "version": "1.0.0",
+    "description": "An app for handle a lot of Futbin functionality through API",
+    "main": "index.js",
+    "license": "MIT",
+    "scripts": {
+      "start": "node -r esm index.js",
+      "dev": "nodemon -r esm index.js"
+    },
+    "devDependencies": {
+      "nodemon": "^2.0.2"
+    },
+    "dependencies": {
+      "@google-cloud/firestore": "^3.5.1",
+      "axios": "^0.19.2",
+      "cheerio": "^1.0.0-rc.3",
+      "cors": "^2.8.5",
+      "dotenv": "^8.2.0",
+      "esm": "^3.2.25",
+      "express": "^4.17.1",
+      "firebase": "^7.8.2"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

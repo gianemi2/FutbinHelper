@@ -4,7 +4,7 @@ const axios = require('axios')
 const app = express();
 require('dotenv').config()
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 
 const { getAllSbcs, getLastYearTodaySbcs } = require('./services/Firebase')
 
